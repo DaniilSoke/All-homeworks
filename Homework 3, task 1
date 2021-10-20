@@ -1,0 +1,14 @@
+#include <iostream>
+using namespace std;
+void NUMB(int N) {
+	if (N/10 > 0) {
+		NUMB(N / 10);
+	}
+	cout << N % 10 << ' ';
+}
+int main() {
+	int N;
+	cin >> N;
+	NUMB(N);
+	return 0;
+}
