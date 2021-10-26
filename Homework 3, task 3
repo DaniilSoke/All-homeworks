@@ -1,0 +1,19 @@
+#include <iostream>
+using namespace std;
+int RAZLOZHENIE(int n, int i = 2) {
+	if (i <= n) {
+		if (n % i == 0) {
+			cout << i << "*";
+			return RAZLOZHENIE(n / i, i);
+		}
+		else {
+			return RAZLOZHENIE(n, i + 1);
+		}
+	}
+}
+int main() {
+	int n;
+	cin >> n;
+	RAZLOZHENIE(n);
+	cout << 1;
+}
