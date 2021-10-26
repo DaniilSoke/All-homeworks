@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+int PEREVOD(int n, int x = 1) {
+    if (n != 0) {
+        return PEREVOD(n / 10, x * 2) + (n % 10) * x;
+    }
+    else return 0;
+}
+int main() {
+    int n,x;
+    cin >> n;
+    x = n;
+    if (n % 10 != 0 && n%10 != 1) {
+        cout << "Oshibka, vashe chislo ne imeet dvoichniy vid";
+    }
+    while (n % 10 == 0 || n%10 == 1) {
+        n = n / 10;
+        if (n % 10 != 0 && n%10!=1) {
+            cout << "Oshibka, vashe chislo ne imeet dvoichniy vid";
+            break;
+        }
+        if (n == 0) { break; }
+    }
+    cout << PEREVOD(x);
+    return 0;
+}
