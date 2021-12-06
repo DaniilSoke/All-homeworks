@@ -1,0 +1,37 @@
+#include <iostream>
+int main()
+{
+    setlocale(LC_ALL, "Rus");
+    //ввод
+    int n, m;
+    std::cout << "Введите колво строк и столбцов в матрице : ";
+    std::cin >> m >> n;;
+    int** a = new int* [n];
+    for (int i = 0; i < n; i++) {
+        a[i] = new int[m];
+    }
+    std::cout << "Введите элементы матрицы : " << std::endl;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            std::cin >> a[i][j];
+        }
+    }
+    //обработка
+    std::cout << "Введите номера строк, которые должны поменяться местами : ";
+    int m1, m2;
+    std::cin >> m1 >> m2;
+    m1 -= 1;
+    m2 -= 1;
+    for (int i = 0; i < n; i++) {
+        int t = a[m2][i];
+        a[m2][i] = a[m1][i];
+        a[m1][i] = t;
+    }
+    //вывод
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            std::cout << a[i][j] << "\t";
+        }
+        std::cout << std::endl;
+    }
+}
