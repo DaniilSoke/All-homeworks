@@ -1,0 +1,39 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+int randn() {
+    return rand() % 21 - 10;
+}
+int main()
+{
+    srand(time(0));
+    setlocale(LC_ALL, "Rus");
+    //ввод
+    int n, m;
+    std::cout << "Введите колво строк и столбцов в матрице : ";
+    std::cin >> n >> m;
+    int** a = new int* [n];
+    for (int i = 0; i < n; i++) {
+        a[i] = new int[m];
+    }
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            a[i][j] = randn();
+        }
+    }
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            std::cout.width(3);
+            std::cout << a[i][j] << "\t";
+        }
+        std::cout << std::endl;
+    }
+    int sum = 0;
+    for (int j = 0; j < m; j++) {
+        for (int i = 0; i < n; i++) {
+            sum = sum + a[i][j];
+        }
+        std::cout << "Сумма элементов в столбце номер " << j + 1 << ":  " << sum << std::endl;
+        sum = 0;
+    }
+}
