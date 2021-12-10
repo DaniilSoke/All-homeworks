@@ -1,0 +1,20 @@
+#include <iostream>
+int main() {
+	int n = 10000;
+	int sum = 0;
+	int t=1;
+	char* s = new char[n];
+	std::cin.get(s,n);
+	//Полезные элементы
+	int k = strlen(s);
+	for (int i = k - 1; i > -1; i--) {
+		if (s[i] != '+') {
+			sum += (int(s[i]) - int('0')) * t;
+			t = t * 10;
+		}
+		else
+			t = 1;
+	}
+	std::cout << sum;
+	return 0;
+}
