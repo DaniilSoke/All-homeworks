@@ -16,5 +16,6 @@ int main() {
 			t = 1;
 	}
 	std::cout << sum;
+	delete s;
 	return 0;
 }
