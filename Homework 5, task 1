@@ -1,21 +1,45 @@
 #include <iostream>
+
+void delete_matrix(int** a, int m) {
+    for (int i = 0; i < m; i++) {
+        delete[] a[i];
+    }
+    delete a;
+    
+}
+
+void fill_matrix(int** a, int m, int n){
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            a[i][j] = rand() % 20 + 1;
+        }
+    }
+}
+
+void print_matrix(int** a, int m, int n) {
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            std::cout << a[i][j] << "\t";
+        }
+        std::cout << std::endl;
+    }
+}
+
 int main()
 {
     setlocale(LC_ALL, "Rus");
     //ввод
     int n, m;
+    srand(time(0));
     std::cout << "Введите колво строк и столбцов в матрице : ";
     std::cin >> m >> n;;
     int** a = new int* [m];
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < m; i++) {
         a[i] = new int[n];
     }
-    std::cout << "Введите элементы матрицы : " << std::endl;
-    for (int i = 0; i < m; i++) {
-        for (int j = 0; j < n; j++) {
-            std::cin >> a[i][j];
-        }
-    }
+
+    fill_matrix(a, m, n);
+    print_matrix(a, m, n);
     //обработка
     std::cout << "Введите номера строк, которые должны поменяться местами : ";
     int m1, m2;
@@ -28,11 +52,7 @@ int main()
         a[m1][i] = t;
     }
     //вывод
-    for (int i = 0; i < m; i++) {
-        for (int j = 0; j < n; j++) {
-            std::cout << a[i][j] << "\t";
-        }
-        std::cout << std::endl;
-    }
+    print_matrix(a, m, n);
+    delete_matrix(a, m);
     return 0;
 }
