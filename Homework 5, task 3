@@ -4,23 +4,13 @@
 int randn() {
     return rand() % 21 - 10;
 }
-int main()
-{
-    srand(time(0));
-    setlocale(LC_ALL, "Rus");
-    //ввод
-    int n, m;
-    std::cout << "Введите колво строк и столбцов в матрице : ";
-    std::cin >> n >> m;
-    int** a = new int* [n];
+void delete_matrix(int** a, int n) {
     for (int i = 0; i < n; i++) {
-        a[i] = new int[m];
+        delete[] a[i];
     }
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < m; j++) {
-            a[i][j] = randn();
-        }
-    }
+    delete a;
+}
+void print_matrix(int** a, int m, int n) {
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
             std::cout.width(3);
@@ -28,6 +18,27 @@ int main()
         }
         std::cout << std::endl;
     }
+}
+void fill_matrix(int** a, int m, int n) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            a[i][j] = randn();
+        }
+    }
+}
+int main()
+{
+    srand(time(0));
+    setlocale(LC_ALL, "Rus");
+    int n, m;
+    std::cout << "Введите колво строк и столбцов в матрице : ";
+    std::cin >> n >> m;
+    int** a = new int* [n];
+    for (int i = 0; i < n; i++) {
+        a[i] = new int[m];
+    }
+    fill_matrix(a, m, n);
+    print_matrix(a, m, n);
     int sum = 0;
     for (int j = 0; j < m; j++) {
         for (int i = 0; i < n; i++) {
@@ -36,4 +47,6 @@ int main()
         std::cout << "Сумма элементов в столбце номер " << j + 1 << ":  " << sum << std::endl;
         sum = 0;
     }
+    delete_matrix(a, n);
+    return 0;
 }
