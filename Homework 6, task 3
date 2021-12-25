@@ -1,32 +1,38 @@
 #include <iostream>
 int main() {
 	int n = 10000, g;
-	std::string t1, t2, t3;
+	char* t1= new char[100];
+	char* t2 = new char[100];
+	char* t3 = new char[100];
 	char* s = new char[n];
-	std::cin.get(s,n);
+	std::cin.get(s, n);
 	//Полезные элементы
 	int k = strlen(s);
 	for (int i = k - 1; i > -1; i--) {
 		if (s[i] == ' ') {
-			t2 = s[i + 1];
-			t2 += '.';
 			g = i;
 			break;
 		}
 	}
 	for (int i = g - 1; i > -1; i--) {
 		if (s[i] == ' ') {
-			t1 = s[i + 1];
-			t1 += '.';
+			std::cout << s[i + 1] << ".";
+			break;
+		}
+	}
+	for (int i = k - 1; i > -1; i--) {
+		if (s[i] == ' ') {
+			std::cout << s[i + 1] << ".";
+			g = i;
 			break;
 		}
 	}
 	for (int i = 0; i < k; i++) {
 		if (s[i] != ' ') {
-			t3 += s[i];
+			std::cout << s[i];
 		}
 		else { break; }
 	}
-	std::cout << t1+t2+t3;
+	delete t1,t2,t3,s;
 	return 0;
 }
