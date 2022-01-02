@@ -1,0 +1,63 @@
+#include <iostream>
+void fill_matrix(int** a, int n, int m) {
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			a[i][j] = rand() % 99 + 1;
+		}
+	}
+}
+void print_matrix(int** a, int n, int m) {
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			std::cout << a[i][j] << "\t";
+		}
+		std::cout << std::endl;
+	}
+	std::cout << std::endl;
+}
+void fill_multi(int** a, int** b, int** c, int n, int m, int s) {
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < s; j++) {
+			c[i][j] = 0;
+			//берём i-ую строку матрицы a и j-ый стобец матрицы b, поэлементно умножаем и всё это суммируем
+			for (int k = 0; k < m; k++) {
+				c[i][j] += a[i][k]*b[k][j];
+			}
+		}
+	}
+}
+void delete_matrix(int** a, int n) {
+	for (int i = 0; i < n; i++) {
+		delete[]a[i];
+	}
+	delete a;
+}
+int main() {
+	setlocale(LC_ALL, "Rus");
+	int n, m, s;
+	srand(time(0));
+	std::cout << ("Введите количество строк и столбцов в первой матрице и количество столбцов второй матрицы: ");
+	std::cin >> n >> m >> s;
+	int** a = new int* [n];
+	for (int i = 0; i < n; i++) {
+		a[i] = new int[m];
+	}
+	int** b = new int* [m];
+	for (int i = 0; i < m; i++) {
+		b[i] = new int[s];
+	}
+	int** c = new int*[n];
+	for (int i = 0; i < n; i++) {
+		c[i] = new int[s];
+	}
+	fill_matrix(a, n, m);
+	fill_matrix(b, m, s);
+	print_matrix(a, n, m);
+	print_matrix(b, m, s);
+	fill_multi(a, b, c, n, m, s);
+	print_matrix(c, n, s);
+	delete_matrix(a, n);
+	delete_matrix(b, m);
+	delete_matrix(c, n);
+	return 0;
+}
